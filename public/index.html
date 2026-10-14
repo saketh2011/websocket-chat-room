@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Room</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="join-screen">
+    <form id="join-form" class="card">
+      <h1>Join the chat</h1>
+      <p class="hint">Pick a name to come in.</p>
+      <input id="username" placeholder="Your name" maxlength="20" autocomplete="off" required>
+      <button>Join</button>
+      <p id="join-error"></p>
+    </form>
+  </div>
+
+  <div id="chat-screen" hidden>
+    <aside>
+      <h2>Online</h2>
+      <ul id="users"></ul>
+    </aside>
+    <main>
+      <header>
+        <h1>Chat Room</h1>
+        <span id="status">Connected</span>
+      </header>
+      <ul id="messages"></ul>
+      <p id="typing"></p>
+      <form id="message-form">
+        <input id="message-input" placeholder="Type a message" maxlength="500" autocomplete="off">
+        <button id="send-button">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
