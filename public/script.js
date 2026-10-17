@@ -1,4 +1,3 @@
-// Connects to whatever host served this page (works locally and when deployed together)
 const protocol = location.protocol === 'https:' ? 'wss' : 'ws';
 const SOCKET_URL = `${protocol}://${location.host}`;
 
@@ -22,7 +21,6 @@ let myName = '';
 let typing = false;
 let typingTimer;
 
-// Same name always gets the same color
 function colorFor(name) {
   let sum = 0;
   for (const letter of name) sum += letter.charCodeAt(0);
@@ -46,7 +44,6 @@ function connect() {
   socket = new WebSocket(SOCKET_URL);
 
   socket.addEventListener('open', () => {
-    // First time we use the typed name. After a dropped connection we rejoin with the same name.
     send({ type: 'join', username: myName || usernameInput.value });
   });
 
@@ -58,7 +55,6 @@ function connect() {
 
   socket.addEventListener('close', () => {
     if (!myName) return;
-    // We were in the room, so try to get back in
     setOnline(false);
     typingLine.textContent = '';
     setTimeout(connect, 2000);
@@ -137,7 +133,6 @@ function addMessage({ username, text, time }) {
   meta.className = 'meta';
   meta.append(who, ` · ${clock}`);
 
-  // textContent (not innerHTML) so nobody can inject HTML into the page
   const body = document.createElement('p');
   body.textContent = text;
 
@@ -150,7 +145,6 @@ function scrollToBottom() {
   messagesList.scrollTop = messagesList.scrollHeight;
 }
 
-// Tell the server when we start and stop typing
 function stopTyping() {
   clearTimeout(typingTimer);
   if (typing) {
